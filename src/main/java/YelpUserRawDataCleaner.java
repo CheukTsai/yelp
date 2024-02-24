@@ -50,11 +50,6 @@ public class YelpUserRawDataCleaner {
     }
 
     public static class CSVReducer extends Reducer<Text,Text,Text,NullWritable> {
-        @Override
-        protected void setup(Reducer<Text, Text, Text, NullWritable>.Context context) throws IOException, InterruptedException {
-            NullWritable nw = NullWritable.get();
-            context.write(new Text("user_id,name,review_count,useful,funny,cool"), nw);
-        }
 
         public void reduce(Text key, Iterable<Text> values,
                            Context context

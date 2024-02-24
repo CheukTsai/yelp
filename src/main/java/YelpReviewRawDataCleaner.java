@@ -36,21 +36,17 @@ public class YelpReviewRawDataCleaner {
                 long funny = (long) jsonObject.get("funny");
                 long cool = (long) jsonObject.get("cool");
                 String text = (String) jsonObject.get("text");
+
                 text = text.replaceAll("\r\n", "");
                 text = text.replaceAll("\n", "");
                 text = text.replaceAll("\r", "");
-                int len = text.length();
-
-                double label = (double)useful * 0.8 - (double)funny * 0.5 + (double) cool * 0.1 + (double) len / 50.0;
 
                 sb.append(review_id).append(",");
                 sb.append(user_id).append(",");
                 sb.append(useful).append(",");
                 sb.append(funny).append(",");
                 sb.append(cool).append(",");
-                sb.append(len).append(",");
-                sb.append(label);
-
+                sb.append(text).append(",");
                 context.write(new Text(review_id), new Text(sb.toString()));
 
             } catch (ParseException e) {
@@ -60,43 +56,13 @@ public class YelpReviewRawDataCleaner {
     }
 
     public static class CSVReducer extends Reducer<Text,Text,Text,NullWritable> {
-
-        private List<Double> list = new ArrayList<>();
-        private List<String[]> outputList = new ArrayList<>();
-
-        @Override
-        protected void setup(Reducer<Text, Text, Text, NullWritable>.Context context) throws IOException, InterruptedException {
-            super.setup(context);
-        }
-
         public void reduce(Text key, Iterable<Text> values,
                            Context context
         ) throws IOException, InterruptedException {
             Iterator<Text> itr = values.iterator();
             while (itr.hasNext()) {
                 Text val = itr.next();
-                String[] split = val.toString().split(",");
-                list.add(Double.parseDouble(split[split.length - 1]));
-                outputList.add(split);
-            }
-        }
-
-        @Override
-        protected void cleanup(Reducer<Text, Text, Text, NullWritable>.Context context) throws IOException, InterruptedException {
-            Collections.sort(list);
-            double median = list.get((list.size() + 1) / 3);
-
-            for (String[] split : outputList) {
-                String[] labelRemoved = Arrays.copyOfRange(split, 0, split.length - 1);
-                double label = Double.parseDouble(split[split.length - 1]);
-                String val = String.join(",", labelRemoved);
-                val += ",";
-                if (label < median) {
-                    val += "0";
-                } else {
-                    val += "1";
-                }
-                context.write(new Text(String.valueOf(val)), NullWritable.get());
+                context.write(val, NullWritable.get());
             }
         }
     }

@@ -1,0 +1,40 @@
+2023-09-30T22:49:40.939Z INFO Ensure step 2 jar file s3://emr-tsai/wordcount/wordCount1.8.jar
+2023-09-30T22:49:43.214Z INFO StepRunner: Created Runner for step 2
+INFO startExec 'hadoop jar /mnt/var/lib/hadoop/steps/s-0445695TP85P6T49JLS/wordCount1.8.jar s3://emr-tsai/wordcount/input/ s3://emr-tsai/wordcount/output/'
+INFO Environment:
+  PATH=/usr/lib64/qt-3.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/aws/puppet/bin/
+  SECURITY_PROPERTIES=/emr/instance-controller/lib/security.properties
+  HISTCONTROL=ignoredups
+  HISTSIZE=1000
+  HADOOP_ROOT_LOGGER=INFO,DRFA
+  JAVA_HOME=/etc/alternatives/jre
+  AWS_DEFAULT_REGION=us-west-2
+  LANG=en_US.UTF-8
+  MAIL=/var/spool/mail/hadoop
+  LOGNAME=hadoop
+  PWD=/
+  HADOOP_CLIENT_OPTS=-Djava.io.tmpdir=/mnt/var/lib/hadoop/steps/s-0445695TP85P6T49JLS/tmp
+  _=/etc/alternatives/jre/bin/java
+  LESSOPEN=||/usr/bin/lesspipe.sh %s
+  SHELL=/bin/bash
+  QTINC=/usr/lib64/qt-3.3/include
+  USER=hadoop
+  HADOOP_LOGFILE=syslog
+  HOSTNAME=ip-172-31-39-83
+  QTDIR=/usr/lib64/qt-3.3
+  HADOOP_LOG_DIR=/mnt/var/log/hadoop/steps/s-0445695TP85P6T49JLS
+  EMR_STEP_ID=s-0445695TP85P6T49JLS
+  QTLIB=/usr/lib64/qt-3.3/lib
+  HOME=/home/hadoop
+  SHLVL=1
+  HADOOP_IDENT_STRING=hadoop
+INFO redirectOutput to /mnt/var/log/hadoop/steps/s-0445695TP85P6T49JLS/stdout
+INFO redirectError to /mnt/var/log/hadoop/steps/s-0445695TP85P6T49JLS/stderr
+INFO Working dir /mnt/var/lib/hadoop/steps/s-0445695TP85P6T49JLS
+INFO ProcessRunner started child process 19874
+2023-09-30T22:49:43.218Z INFO HadoopJarStepRunner.Runner: startRun() called for s-0445695TP85P6T49JLS Child Pid: 19874
+INFO Synchronously wait child process to complete : hadoop jar /mnt/var/lib/hadoop/steps/s-0445695T...
+INFO waitProcessCompletion ended with exit code 0 : hadoop jar /mnt/var/lib/hadoop/steps/s-0445695T...
+INFO total process run time: 52 seconds
+2023-09-30T22:50:35.520Z INFO Step created jobs: job_1696113747778_0001
+2023-09-30T22:50:35.520Z INFO Step succeeded with exitCode 0 and took 52 seconds
